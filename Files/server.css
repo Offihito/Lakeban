@@ -1,0 +1,625 @@
+         /* Server Sidebar */
+.server-sidebar {
+    width: 72px; /* Sunucu sidebar'ın genişliği */
+    background-color: #121212;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 100;
+}
+#hovermessage {
+    background-color: rgba(30, 30, 30, 255);
+}
+
+#hovermessage:hover {
+    background-color: #333333;
+}
+
+
+.message-bg {
+        background-color: rgba(30, 30, 30, 255); /* Tamamen siyah yerine koyu gri */
+    }
+    .message-text {
+    word-wrap: break-word;
+}
+.edit-message-form {
+    margin-top: 10px;
+}
+
+.edit-message-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.edit-message-form button {
+    margin-top: 10px;
+}
+
+.edit-message-form .cancel-edit {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Yanıtlanan Mesaj İçin Yeni CSS */
+.reply-message-container {
+    background-color: #2f3136; /* Daha koyu bir arka plan rengi */
+    border-left: 4px solid #7289da; /* Mavi bir kenarlık */
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+/* Context Menu */
+.context-menu {
+    position: absolute;
+    background-color: #2f3136;
+    border: 1px solid #444;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+}
+
+.context-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.context-menu li {
+    padding: 8px 16px;
+    color: #dcddde;
+    cursor: pointer;
+}
+
+.context-menu li:hover {
+    background-color: #7289da;
+    color: white;
+}
+.options-menu {
+    position: absolute;
+    right: 0;
+    top: 100%; /* Menüyü mesajın altına yerleştir */
+    z-index: 1000; /* Diğer öğelerin üzerinde görünmesini sağla */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.options-menu.hidden {
+    display: none;
+}
+
+.options-menu:not(.hidden) {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Üç nokta butonunu varsayılan olarak gizle */
+.more-options {
+    display: none;
+    color: white !important;
+}
+
+/* Mesajın üzerine gelindiğinde üç nokta butonunu göster */
+.message-bg:hover .more-options {
+    display: block;
+}
+/* Üç nokta menüsündeki yazıların ve ikonların gri olmasını sağlar */
+.options-menu li {
+    color: #9CA3AF !important; /* Yazı rengini gri yapar */
+}
+
+.options-menu li:hover {
+    background-color: #7289da; /* Hover rengini korur */
+    color: white !important; /* Hover durumunda yazı rengini beyaz yapar */
+}
+
+/* İkonların gri olmasını sağlar */
+.options-menu li i {
+    color: #9CA3AF !important;
+}
+
+/* Hover durumunda ikonların beyaz olmasını sağlar */
+.options-menu li:hover i {
+    color: white !important;
+}
+/* Üç nokta butonunu varsayılan olarak gizle */
+.more-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: -10px; /* İkonu 10px yukarı taşı */
+    background-color: transparent; /* Siyah arka planı kaldır */
+    padding: 4px; /* İsteğe bağlı: İkonun etrafında boşluk bırakır */
+    border-radius: 4px; /* İsteğe bağlı: Köşeleri yuvarlar */
+    color: #9CA3AF; /* İkon rengini gri yap */
+}
+
+/* Mesajın üzerine gelindiğinde üç nokta butonunu göster */
+.message-bg:hover .more-options {
+    display: block;
+}
+
+/* Hover durumunda ikon rengini beyaz yap */
+.more-options:hover {
+    color: white;
+}
+/* Formun veya kapsayıcı div'in arkaplan rengi */
+
+/* Mesaj Giriş Alanı */
+#message-input {
+    color: white; /* Yazı rengi */
+    border: none;
+    padding: 10px;
+    width: 100%;
+        background: #363636;
+        border-radius: 15px;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+    }
+
+    .message-input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 15px rgba(99,102,241,0.2);
+    }
+}
+
+/* Gönder Butonu */
+#send-button {
+    background-color: #5865F2; /* Direkt mesajdaki mavi renk */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#send-button:disabled {
+    background-color: #4752c4; /* Pasif durumdaki arkaplan rengi */
+    opacity:0.5;
+    cursor: not-allowed;
+}
+
+/* Emoji ve Dosya Yükleme Butonları */
+#emoji-button, label[for="file-input"] {
+    background-color: transparent;
+    border: none;
+    color: #A0A0A0; /* Direkt mesajdaki gri renk */
+    cursor: pointer;
+}
+
+#emoji-button:hover, label[for="file-input"]:hover {
+    color: white; /* Hover durumunda yazı rengi */
+    background-color: #4A4A4A; /* Hover durumunda arkaplan rengi */
+}
+#typing-indicator {
+    color: #fff;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.typing-dots {
+    display: inline-flex;
+    align-items: center;
+}
+
+.typing-dots span {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: blink 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+/* Genel Form Stili */
+.message-form {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #161616;
+    border-top: 1px solid #515151;
+    border-radius: 0; /* Köşeleri keskin yap */
+    margin-top: 0; /* Varsayılan olarak üst boşluk yok */
+    margin-bottom: 0px; /* Alt boşluk */
+}
+
+/* Formu Alta Kaydırmak İçin */
+.message-form.align-bottom {
+    margin-top: 20px; /* Formu biraz aşağı kaydır */
+}
+
+/* Emoji ve Dosya Butonları */
+.emoji-button, .file-label {
+    color: #9CA3AF;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0; /* Köşeleri keskin yap */
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.emoji-button:hover, .file-label:hover {
+    color: #FFFFFF;
+    background-color: #4B5563;
+}
+
+.icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+
+/* Server.php için mesaj giriş alanı rengi */
+.message-form.server-form .message-input {
+    background-color: #2F3136; /* Server.php'deki farklı renk */
+}
+
+.message-input::placeholder {
+    color: #9CA3AF;
+}
+
+/* Dosya Yükleme Alanı */
+.file-input {
+    display: none;
+}
+
+/* Gönder Butonu */
+.send-button {
+    padding: 0.5rem 1rem;
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0; /* Köşeleri keskin yap */
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.send-button:disabled {
+    background-color: #6B7280;
+    cursor: not-allowed;
+}
+
+.send-button:not(:disabled):hover {
+    background-color: #2563EB;
+}.more-options {
+    position: absolute;
+    right: 0;
+    top: 30%; /* Mesaj konteynırının ortasına hizala */
+    transform: translateY(-50%); /* Dikeyde tam ortala */
+    background-color: transparent;
+    padding: 4px;
+    border-radius: 4px;
+    color: #9CA3AF;
+    display: none; /* Varsayılan olarak gizli */
+}
+/* User Profile Popup Styles */
+#user-profile-popup {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    backdrop-filter: blur(5px);
+}
+
+#user-profile-popup:not(.hidden) {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+#user-profile-popup.hidden {
+    opacity: 0;
+    transform: scale(0.9) translateY(-40px);
+}
+
+#user-profile-popup .bg-[#2f3136] {
+    background-color: #2f3136;
+    border-radius: 8px;
+    width: 520px !important;
+    height: 620px !important;
+    max-width: 520px !important;
+    max-height: 620px !important;
+    min-width: 520px !important;
+    min-height: 620px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#user-profile-popup .bg-[#2f3136]:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+#popup-background {
+    transition: transform 0.3s ease;
+    height: 128px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+#user-profile-popup:hover #popup-background {
+    transform: scale(1.02);
+}
+
+#popup-status-indicator.online {
+    background-color: #3ba55c;
+}
+
+#popup-status-indicator.offline {
+    background-color: #747f8d;
+}
+
+.online-pulse {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#popup-roles .role-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#popup-roles .role-tag:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#popup-action-buttons {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+#popup-action-buttons button {
+    font-size: 0.875rem;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#popup-username {
+    line-height: 1.2;
+    transition: color 0.2s ease;
+}
+
+#popup-username:hover {
+    color: #5865f2;
+}
+
+#popup-bio {
+    max-height: 80px;
+    overflow-y: auto;
+    word-break: break-word;
+}
+
+#popup-friends-list {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+#popup-friends-list::-webkit-scrollbar, #popup-bio::-webkit-scrollbar, .max-h-[400px]::-webkit-scrollbar {
+    width: 6px;
+}
+
+#popup-friends-list::-webkit-scrollbar-track, #popup-bio::-webkit-scrollbar-track, .max-h-[400px]::-webkit-scrollbar-track {
+    background: #2a2a2a;
+    border-radius: 3px;
+}
+
+#popup-friends-list::-webkit-scrollbar-thumb, #popup-bio::-webkit-scrollbar-thumb, .max-h-[400px]::-webkit-scrollbar-thumb {
+    background: #5865f2;
+    border-radius: 3px;
+}
+
+#popup-friends-list .flex:hover {
+    background-color: #36393f;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+/* User Profile Popup Styles */
+#user-profile-popup {
+    --primary-bg: #0f0f0f;
+    --secondary-bg: #1a1a1a;
+    --accent-color: #3CB371;
+    --text-primary: #e0e0e0;
+    --text-secondary: #909090;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+#user-profile-popup .bg-\[\#2f3136\] {
+    background: var(--primary-bg);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+
+
+/* Avatar Section */
+#user-profile-popup .relative .w-16 {
+    width: 96px;
+    height: 96px;
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 24px rgba(60, 179, 113, 0.3);
+}
+
+/* Status Indicator */
+#popup-status-indicator {
+    width: 20px;
+    height: 20px;
+    border-width: 3px;
+    bottom: 6px;
+    right: 6px;
+}
+
+/* User Info Section */
+#popup-username {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Action Buttons */
+#popup-action-buttons button {
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+/* Details Container */
+#user-profile-popup .bg-\[\#232428\] {
+    background: var(--secondary-bg);
+    border-radius: 12px;
+    margin: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Friends List Hover Effect */
+#popup-friends-list .flex:hover {
+    background: rgba(60, 179, 113, 0.1);
+}
+
+/* Scrollbar Styling */
+#popup-friends-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#popup-friends-list::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#user-profile-popup:not(.hidden) {
+    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Yanıtlama Formu Stilleri */
+.reply-message-form {
+    background-color: #2f3136;
+    border-left: 4px solid #7289da;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.reply-message-form textarea {
+    width: 100%;
+    background: #40444b !important;
+    border: 1px solid #202225 !important;
+    color: #dcddde;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Düzenleme Formu Stilleri */
+.edit-message-form {
+    background-color: #2f3136;
+    border-left: 4px solid #3ba55d;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.edit-message-form textarea {
+    width: 100%;
+    background: #40444b !important;
+    border: 1px solid #202225 !important;
+    color: #dcddde;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Ortak Button Stilleri */
+.reply-message-form button,
+.edit-message-form button {
+    transition: all 0.2s ease;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.reply-message-form button[type="submit"],
+.edit-message-form button[type="submit"] {
+    background-color: #5865f2;
+    color: white;
+}
+
+.reply-message-form button[type="submit"]:hover,
+.edit-message-form button[type="submit"]:hover {
+    background-color: #4752c4;
+}
+
+.reply-message-form .cancel-reply,
+.edit-message-form .cancel-edit {
+    background-color: #747f8d;
+    color: white;
+    margin-left: 8px;
+}
+
+.reply-message-form .cancel-reply:hover,
+.edit-message-form .cancel-edit:hover {
+    background-color: #5d6772;
+}
+
+/* Form Konteynır Pozisyonlaması */
+.message-and-forms-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
