@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="tr" id="themeElement">
+<head>
+    <meta charset="UTF-8">
+    <title>Bildirim Ses Ayarları</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/icon.ico">
+    <style>
+        :root, .root {
+            --hover: #3CB371;
+            --gradient: #423d3c;
+            --scrollback: #0d3b22;
+            --error: #ed5151;
+            --font-size: 16px;
+            --accent-color: #3CB371;
+            --custom-background-color: #663399;
+            --custom-secondary-color: #3CB371;
+        }
+        .red-theme {
+            --hover: #870f0f;
+            --gradient: #a01414;
+            --scrollback: #950014;
+        }
+        .blue-theme {
+            --hover: #1775c2;
+            --gradient: #0d2e75;
+            --scrollback: #1775c2;
+        }
+        /* === AYDINLIK TEMA === */
+        .light-theme body {
+            background-color: #F2F3F5;
+            color: #2E3338;
+        }
+        .light-theme .sidebar, .light-theme .content-container, .light-theme .right-sidebar {
+            background-color: #FFFFFF;
+        }
+        .light-theme .app-container {
+            background-color: #F2F3F5;
+        }
+        .light-theme .sidebar-item {
+            color: #4F5660;
+        }
+        .light-theme .sidebar-item:hover, .light-theme .sidebar-item.active {
+            background-color: #e3e5e8;
+            color: #060607;
+        }
+        .light-theme .content-container h1, .light-theme .content-container h3, .light-theme .sound-info .title {
+            color: #060607;
+        }
+        .light-theme .content-container h5, .light-theme .category, .light-theme .keybind_c2b141, .light-theme .sound-info .description {
+            color: #4F5660;
+        }
+        .light-theme hr {
+            border-top: 1px solid #e3e5e8;
+        }
+        .light-theme .sound-option {
+            background-color: #F8F9FA;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .light-theme .sound-option:hover {
+            background-color: #e3e5e8;
+        }
+        .light-theme .preview-btn {
+            background-color: #D1D5DB;
+        }
+        .light-theme .preview-btn:hover {
+            background-color: #B0B7C0;
+        }
+        .light-theme .edit-profile-btn {
+            background-color: var(--accent-color);
+        }
+        .light-theme .edit-profile-btn:hover {
+            background-color: #2e9b5e;
+        }
+        .light-theme .tip {
+            background-color: #F8F9FA;
+        }
+        .light-theme .sound-info .icon {
+            color: #4F5660;
+        }
+
+        /* === KOYU TEMA === */
+        .dark-theme body {
+            background-color: #1E1E1E;
+            color: #ffffff;
+        }
+        .dark-theme .sidebar, .dark-theme .content-container, .dark-theme .right-sidebar {
+            background-color: #242424;
+        }
+        .dark-theme .app-container {
+            background-color: #1E1E1E;
+        }
+        .dark-theme .sidebar-item {
+            color: #b9bbbe;
+        }
+        .dark-theme .sidebar-item:hover, .dark-theme .sidebar-item.active {
+            background-color: #2f3136;
+            color: #ffffff;
+        }
+        .dark-theme .content-container h1, .dark-theme .content-container h3, .dark-theme .sound-info .title {
+            color: #ffffff;
+        }
+        .dark-theme .content-container h5, .dark-theme .category, .dark-theme .keybind_c2b141, .dark-theme .sound-info .description {
+            color: #b9bbbe;
+        }
+        .dark-theme hr {
+            border-top: 1px solid #2f3136;
+        }
+        .dark-theme .sound-option {
+            background-color: #2f3136;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .dark-theme .sound-option:hover {
+            background-color: #35383e;
+        }
+        .dark-theme .preview-btn {
+            background-color: #4F545C;
+        }
+        .dark-theme .preview-btn:hover {
+            background-color: #5A6069;
+        }
+        .dark-theme .edit-profile-btn {
+            background-color: var(--accent-color);
+        }
+        .dark-theme .edit-profile-btn:hover {
+            background-color: #2e9b5e;
+        }
+        .dark-theme .tip {
+            background-color: #2f3136;
+        }
+
+        /* === ÖZEL TEMA === */
+        .custom-theme body {
+            background-color: color-mix(in srgb, var(--custom-background-color) 90%, var(--custom-secondary-color) 10%);
+            color: #ffffff;
+        }
+        .custom-theme .app-container {
+            background-color: var(--custom-background-color);
+        }
+        .custom-theme .sidebar, .custom-theme .content-container, .custom-theme .right-sidebar {
+            background-color: color-mix(in srgb, var(--custom-background-color) 80%, var(--custom-secondary-color) 20%);
+        }
+        .custom-theme .sidebar-item {
+            color: color-mix(in srgb, var(--custom-background-color) 40%, white);
+        }
+        .custom-theme .sidebar-item:hover, .custom-theme .sidebar-item.active {
+            background-color: color-mix(in srgb, var(--custom-background-color) 60%, var(--custom-secondary-color) 40%);
+            color: #ffffff;
+        }
+        .custom-theme .content-container h1, .custom-theme .content-container h3, .custom-theme .sound-info .title {
+            color: #ffffff;
+        }
+        .custom-theme .content-container h5, .custom-theme .category, .custom-theme .keybind_c2b141, .custom-theme .sound-info .description {
+            color: color-mix(in srgb, var(--custom-background-color) 40%, white);
+        }
+        .custom-theme hr {
+            border-top: 1px solid color-mix(in srgb, var(--custom-background-color) 70%, var(--custom-secondary-color) 30%);
+        }
+        .custom-theme .sound-option {
+            background-color: color-mix(in srgb, var(--custom-background-color) 70%, var(--custom-secondary-color) 30%);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .custom-theme .sound-option:hover {
+            background-color: color-mix(in srgb, var(--custom-background-color) 60%, var(--custom-secondary-color) 40%);
+        }
+        .custom-theme .preview-btn {
+            background-color: color-mix(in srgb, var(--custom-secondary-color) 70%, black);
+        }
+        .custom-theme .preview-btn:hover {
+            background-color: color-mix(in srgb, var(--custom-secondary-color) 60%, white);
+        }
+        .custom-theme .edit-profile-btn {
+            background-color: var(--custom-secondary-color);
+        }
+        .custom-theme .edit-profile-btn:hover {
+            background-color: color-mix(in srgb, var(--custom-secondary-color) 80%, white);
+        }
+        .custom-theme input[type="radio"]:checked {
+            border-color: var(--custom-secondary-color);
+        }
+        .custom-theme input[type="radio"]:checked::before {
+            background-color: var(--custom-secondary-color);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            font-size: var(--font-size);
+        }
+        .app-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: var(--app-height);
+            padding: 24px;
+            box-sizing: border-box;
+        }
+        .sidebar {
+            background-color: #242424;
+            width: 260px;
+            padding: 16px 8px;
+            overflow-y: auto;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: #1E1E1E;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+        .category {
+            color: #b9bbbe;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            margin: 8px 0;
+        }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            margin: 2px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #b9bbbe;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .sidebar-item:hover, .sidebar-item.active {
+            background-color: #2f3136;
+            color: #ffffff;
+        }
+        .sidebar-item i {
+            margin-right: 8px;
+        }
+        .content-container {
+            flex-grow: 1;
+            background-color: #242424;
+            padding: 24px;
+            overflow-y: auto;
+            margin-left: 16px;
+            margin-right: 16px;
+            border-radius: 8px;
+        }
+        .content-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .content-container::-webkit-scrollbar-track {
+            background: #1E1E1E;
+        }
+        .content-container::-webkit-scrollbar-thumb {
+            background: #2f3136;
+            border-radius: 4px;
+        }
+        .content-container h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 24px;
+        }
+        .content-container h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 24px 0 8px;
+        }
+        .content-container h5 {
+            font-size: 14px;
+            font-weight: 400;
+            color: #b9bbbe;
+            margin: 8px 0 16px;
+        }
+        .right-sidebar {
+            background-color: #242424;
+            width: 72px;
+            padding: 16px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+        .tools__23e6b {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .container_c2b141 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .closeButton_c2b141 {
+            background-color: #2f3136;
+            border-radius: 4px;
+            padding: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .closeButton_c2b141:hover {
+            background-color: #35383e;
+        }
+        .closeButton_c2b141 svg {
+            width: 18px;
+            height: 18px;
+            fill: #b9bbbe;
+        }
+        .keybind_c2b141 {
+            color: #b9bbbe;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        .sound-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            background-color: #2f3136;
+            transition: background-color 0.2s ease;
+        }
+        .sound-option:hover {
+            background-color: #35383e;
+        }
+        .sound-info {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .sound-info .icon {
+            margin-right: 12px;
+            color: #b9bbbe;
+        }
+        .sound-info .title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .sound-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .preview-btn {
+            background-color: #4F545C;
+            color: #ffffff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+        .preview-btn:hover {
+            background-color: #5A6069;
+        }
+        .preview-btn i {
+            margin-right: 0;
+        }
+        input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #b9bbbe;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+        input[type="radio"]:checked {
+            border-color: var(--hover);
+        }
+        input[type="radio"]:checked::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: var(--hover);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        input[type="radio"]:focus {
+            box-shadow: 0 0 0 2px rgba(60, 179, 113, 0.5);
+        }
+        .tip {
+            display: flex;
+            align-items: center;
+            background-color: #2f3136;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #b9bbbe;
+            margin-top: 16px;
+        }
+        .tip svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+        .tip a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .tip a:hover {
+            text-decoration: underline;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .modal-content {
+            background-color: #2f3136;
+            margin: 10% auto;
+            padding: 24px;
+            border-radius: 8px;
+            width: 400px;
+            max-width: 90%;
+            color: #ffffff;
+        }
+        .modal-content h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            background: #202225;
+            border: 1px solid #141414;
+            color: #ffffff;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .modal-content button {
+            background-color: var(--hover);
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 16px;
+            transition: background-color 0.2s ease;
+        }
+        .modal-content button:hover {
+            background-color: #248A3D;
+        }
+        .close {
+            color: #b9bbbe;
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .close:hover {
+            color: #ffffff;
+        }
+        #back {
+            display: none;
+        }
+        /* Responsive Tasarım */
+        @media (max-width: 1024px) {
+            .app-container {
+                flex-direction: column;
+                padding: 16px;
+            }
+            .sidebar {
+                width: 100%;
+                margin-bottom: 16px;
+                border-radius: 8px;
+            }
+            .content-container {
+                width: 100%;
+                padding: 16px;
+                margin-left: 0;
+                margin-right: 0;
+                border-radius: 8px;
+            }
+            .right-sidebar {
+                display: none;
+            }
+            .modal-content {
+                width: 90%;
+            }
+        }
+        @media (max-width: 768px) {
+            #back {
+                display: flex;
+            }
+            .sidebar {
+                position: absolute;
+                width: 100%;
+                height: 100vh;
+                left: 0%;
+                margin-bottom: 16px;
+                border-radius: 8px;
+            }
+            .content-container {
+                padding-left: 6px !important;
+                padding: 0;
+                position: absolute;
+                width: 100%;
+                height: 100vh;
+                left: 0%;
+                margin-left: 0;
+                margin-right: 0;
+                border-radius: 8px;
+                z-index: 5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div id="movesidebar" class="sidebar">
+            <a id="back" class="sidebar-item" href="https://lakeban.com/directmessages" style="width: 50%"><i data-lucide="arrow-left-to-line"></i> Anasayfaya Dön</a>
+            <div class="category">Kullanıcı Ayarları</div>
+            <div class="sidebar-item" onclick="navigateTo('/settings')"><i data-lucide="user"></i> Hesabım</div>
+            <a href="javascript:void(0)" onclick="navigateTo('/profile')" style="text-decoration: none; color: inherit;">
+                <div class="sidebar-item"><i data-lucide="user-pen"></i> Profilim</div>
+            </a>
+            <div class="sidebar-item"><i data-lucide="shield-check"></i> İçerik Kontrolü</div>
+            <div class="sidebar-item"><i data-lucide="link-2"></i> Bağlantılar</div>
+            <a href="javascript:void(0)" onclick="navigateTo('/language_settings')" style="text-decoration: none; color: inherit;">
+                <div class="sidebar-item"><i data-lucide="languages"></i> Dil</div>
+            </a>
+            <div class="category">Özelleştirme</div>
+            <a href="javascript:void(0)" onclick="navigateTo('/themes.php')" style="text-decoration: none; color: inherit;">
+                <div class="sidebar-item"><i data-lucide="palette"></i> Temalar</div>
+            </a>
+            <a href="javascript:void(0)" onclick="navigateTo('/bildirimses')" style="text-decoration: none; color: inherit;">
+                <div class="sidebar-item active"><i data-lucide="bell"></i> Bildirimler</div>
+            </a>
+            <div class="sidebar-item"><i data-lucide="keyboard"></i> Tuş Atamaları</div>
+            <div class="category">Erişebilirlik</div>
+            <div class="sidebar-item"><i data-lucide="mic"></i> Ses</div>
+            <div class="category">Gelişmiş</div>
+            <div class="sidebar-item"><i data-lucide="circle-ellipsis"></i> Ekstra</div>
+        </div>
+
+        <div id="main-content" class="content-container">
+            <h1>Bildirim Sesi Seçin</h1>
+
+            <div id="notification-message" class="tip" style="display: none;"></div>
+
+            <form id="soundForm" method="POST">
+                <input type="hidden" name="csrf_token" id="csrf_token" value="">
+
+                <div id="soundOptions"></div>
+
+                <div class="tip" style="margin-top: 20px;">
+                    <i data-lucide="info"></i>
+                    <span>Beğendiğiniz sesi seçmek ve dinlemek için önizleme düğmesini kullanın.</span>
+                </div>
+
+                <button type="submit" class="edit-profile-btn" style="margin-top: 20px;">
+                    <i data-lucide="save"></i> Değişiklikleri Kaydet
+                </button>
+            </form>
+        </div>
+        <div class="right-sidebar">
+            <div class="tools__23e6b">
+                <div class="container_c2b141">
+                    <div class="closeButton_c2b141" aria-label="Close" role="button" tabindex="0" onclick="closeSettings()">
+                        <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M17.3 18.7a1 1 0 0 0 1.4-1.4L13.42 12l5.3-5.3a1 1 0 0 0-1.42-1.4L12 10.58l-5.3-5.3a1 1 0 0 0-1.4 1.42L10.58 12l-5.3 5.3a1 1 0 1 0 1.42 1.4L12 13.42l5.3 5.3Z"></path>
+                        </svg>
+                    </div>
+                    <div class="keybind_c2b141" aria-hidden="true">ESC</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SPA için global değişkenler
+        let appData = {};
+        
+        // Sayfa yüklendiğinde verileri al
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNotificationSettings();
+            initEventListeners();
+        });
+
+        // Bildirim ayarlarını yükle
+        async function loadNotificationSettings() {
+            try {
+                const response = await fetch('bildirimses_content.php');
+                appData = await response.json();
+                
+                // Tema ayarlarını uygula
+                applyTheme(appData.currentTheme, appData.currentCustomColor, appData.currentSecondaryColor);
+                
+                // CSRF token'ı ayarla
+                document.getElementById('csrf_token').value = appData.csrf_token;
+                
+                // Ses seçeneklerini oluştur
+                renderSoundOptions(appData.sounds, appData.currentSound);
+                
+                // Mesajları göster
+                showMessages(appData.sound_updated, appData.error_message);
+                
+            } catch (error) {
+                console.error('Veri yüklenirken hata oluştu:', error);
+            }
+        }
+
+        // Tema ayarlarını uygula
+        function applyTheme(theme, customColor, secondaryColor) {
+            const themeElement = document.getElementById('themeElement');
+            themeElement.className = `${theme}-theme`;
+            themeElement.style.setProperty('--custom-background-color', customColor);
+            themeElement.style.setProperty('--custom-secondary-color', secondaryColor);
+            
+            // CSS değişkenlerini güncelle
+            document.documentElement.style.setProperty('--custom-background-color', customColor);
+            document.documentElement.style.setProperty('--custom-secondary-color', secondaryColor);
+        }
+
+        // Ses seçeneklerini oluştur
+        function renderSoundOptions(sounds, currentSound) {
+            const container = document.getElementById('soundOptions');
+            container.innerHTML = '';
+            
+            for (const [path, name] of Object.entries(sounds)) {
+                const isChecked = path === currentSound ? 'checked' : '';
+                
+                const soundOption = document.createElement('div');
+                soundOption.className = 'sound-option';
+                soundOption.innerHTML = `
+                    <div class="sound-info">
+                        <i data-lucide="volume-2" class="icon"></i>
+                        <div class="title">${escapeHtml(name)}</div>
+                    </div>
+                    <div class="sound-controls">
+                        <input type="radio" name="notification_sound"
+                               value="${escapeHtml(path)}" ${isChecked}>
+                        <button type="button" class="preview-btn"
+                                onclick="previewSound('${escapeHtml(path)}')">
+                            <i data-lucide="play"></i> Önizle
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(soundOption);
+            }
+            
+            // Lucide ikonlarını yeniden oluştur
+            lucide.createIcons();
+        }
+
+        // Mesajları göster
+        function showMessages(soundUpdated, errorMessage) {
+            const messageContainer = document.getElementById('notification-message');
+            
+            if (soundUpdated) {
+                messageContainer.innerHTML = '<i data-lucide="check-circle"></i> Ayarlar başarıyla kaydedildi!';
+                messageContainer.style.display = 'flex';
+                messageContainer.style.backgroundColor = '#2f3136';
+                messageContainer.style.color = 'var(--hover)';
+            } else if (errorMessage) {
+                messageContainer.innerHTML = `<i data-lucide="x-circle"></i> ${escapeHtml(errorMessage)}`;
+                messageContainer.style.display = 'flex';
+                messageContainer.style.backgroundColor = '#2f3136';
+                messageContainer.style.color = 'var(--error)';
+            } else {
+                messageContainer.style.display = 'none';
+            }
+            
+            lucide.createIcons();
+        }
+
+        // HTML escape fonksiyonu
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
+        // Event listener'ları başlat
+        function initEventListeners() {
+            // Form gönderimi
+            document.getElementById('soundForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                
+                try {
+                    const response = await fetch('bildirimses_content.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.error_message) {
+                        showMessages(false, result.error_message);
+                    } else if (result.sound_updated) {
+                        showMessages(true, '');
+                        // Sayfayı yeniden yüklemeden verileri güncelle
+                        appData.currentSound = document.querySelector('input[name="notification_sound"]:checked').value;
+                    }
+                    
+                    // CSRF token'ı güncelle
+                    document.getElementById('csrf_token').value = result.csrf_token;
+                    appData.csrf_token = result.csrf_token;
+                    
+                } catch (error) {
+                    console.error('Form gönderilirken hata oluştu:', error);
+                    showMessages(false, 'Bir hata oluştu. Lütfen tekrar deneyin.');
+                }
+            });
+            
+            // ESC tuşu ile kapatma
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeSettings();
+                }
+            });
+            
+            // Sidebar item tıklamaları
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+                    item.classList.add('active');
+                });
+            });
+            
+            // Mobil kaydırma
+            if (window.innerWidth <= 768) {
+                enableSwipeSidebar();
+            }
+        }
+
+        // Ses önizleme
+        function previewSound(soundPath) {
+            const audio = new Audio(soundPath);
+            audio.play();
+        }
+
+        // Ayarları kapat
+        function closeSettings() {
+            navigateTo('/directmessages');
+        }
+
+        // SPA navigasyon
+        function navigateTo(url) {
+            // Eğer bildirim sesi sayfasına gidiliyorsa, sayfayı yenile
+            if (url === '/bildirimses') {
+                window.location.href = url;
+                return;
+            }
+            
+            // Diğer sayfalar için SPA navigasyonu
+            history.pushState(null, null, url);
+            loadPage(url);
+        }
+
+        // Sayfa yükleme (SPA)
+        async function loadPage(url) {
+            try {
+                // Sayfa içeriğini al
+                const response = await fetch(url);
+                const html = await response.text();
+                
+                // Yeni içeriği mevcut sayfaya ekle
+                document.open();
+                document.write(html);
+                document.close();
+                
+            } catch (error) {
+                console.error('Sayfa yüklenirken hata oluştu:', error);
+                // Fallback: normal sayfa yükleme
+                window.location.href = url;
+            }
+        }
+
+        // Mobil kaydırma desteği
+        function enableSwipeSidebar() {
+            const sidebar = document.getElementById("main-content");
+            const leftPanel = document.getElementById("movesidebar");
+            const sidebarWidth = sidebar.offsetWidth;
+            let isDragging = false;
+            let startX = 0;
+            let currentTranslate = sidebarWidth;
+            let previousTranslate = sidebarWidth;
+            
+            sidebar.style.width = `${sidebarWidth}px`;
+            sidebar.style.transform = `translateX(${sidebarWidth}px)`;
+            sidebar.style.transition = 'transform 0.1s ease-out';
+            
+            function handleTouchStart(e) {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+                previousTranslate = currentTranslate;
+                sidebar.style.transition = 'none';
+            }
+            
+            function handleTouchMove(e) {
+                if (!isDragging) return;
+                const currentX = e.touches[0].clientX;
+                const diff = currentX - startX;
+                currentTranslate = previousTranslate + diff;
+                if (currentTranslate < 0) currentTranslate = 0;
+                sidebar.style.transform = `translateX(${currentTranslate}px)`;
+            }
+            
+            function handleTouchEnd() {
+                isDragging = false;
+                sidebar.style.transition = 'transform 0.1s ease-out';
+                if (currentTranslate > sidebarWidth / 2) {
+                    sidebar.style.transform = `translateX(${sidebarWidth}px)`;
+                    currentTranslate = sidebarWidth;
+                    previousTranslate = sidebarWidth;
+                } else {
+                    sidebar.style.transform = 'translateX(0px)';
+                    currentTranslate = 0;
+                    previousTranslate = 0;
+                }
+            }
+            
+            sidebar.addEventListener('touchstart', handleTouchStart);
+            sidebar.addEventListener('touchmove', handleTouchMove);
+            sidebar.addEventListener('touchend', handleTouchEnd);
+        }
+
+        // Pencere boyutu değiştiğinde
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                enableSwipeSidebar();
+            }
+        });
+
+        // Lucide ikonları
+        lucide.createIcons();
+    </script>
+</body>
+</html>
