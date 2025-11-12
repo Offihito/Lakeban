@@ -1,0 +1,77 @@
+# -------------------------------
+# PHP Oturum Süresi Ayarları
+# -------------------------------
+<IfModule mod_php7.c>
+    php_value session.gc_maxlifetime 2592000
+    php_value session.cookie_lifetime 2592000
+</IfModule>
+
+# -------------------------------
+# HTTPS Yönlendirmesi
+# -------------------------------
+RewriteEngine On
+RewriteBase /
+
+# HTTP -> HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# -------------------------------
+# Profil Sayfaları Yönlendirmeleri
+# -------------------------------
+# /id/username -> profile-page.php?username=username
+RewriteRule ^id/([^/]+)$ /profile-page.php?username=$1 [L,QSA]
+
+# /user/username -> profile-page.php?username=username
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^user/([a-zA-Z0-9_-]+)$ profile-page.php?username=$1 [L,QSA]
+
+# /l/toplulukismi -> lakealt.php?name=toplulukismi
+# Eğer dosya yoksa ve .php varsa yönlendir
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# -------------------------------
+# 404 Sayfası
+# -------------------------------
+ErrorDocument 404 /404.html
+
+# -------------------------------
+# www -> non-www yönlendirme
+# -------------------------------
+RewriteCond %{HTTP_HOST} ^www\.lakeban\.com [NC]
+RewriteRule ^(.*)$ https://lakeban.com/$1 [L,R=301]
+
+# -------------------------------
+# Cookie Güvenlik Ayarı
+# -------------------------------
+<IfModule mod_headers.c>
+    Header always edit Set-Cookie (.*) "$1; SameSite=Strict"
+</IfModule>
+
+# -------------------------------
+# Hassas Dosya Koruması
+# -------------------------------
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# -------------------------------
+# Özel 403 Sayfası (varsa)
+# -------------------------------
+<Files 403.shtml>
+    order allow,deny
+    allow from all
+</Files>
+
+# -------------------------------
+# IP Engelleme
+# -------------------------------
+deny from 178.233.1.141
+deny from 88.228.67.192
+deny from 157.230.116.105
+deny from 95.70.129.99
+deny from 85.107.120.99
