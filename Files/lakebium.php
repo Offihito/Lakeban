@@ -27,8 +27,8 @@ try {
 
 // Stripe configuration
 require_once __DIR__ . '/stripe-php/init.php';
-\Stripe\Stripe::setApiKey('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');
-define('STRIPE_PUBLISHABLE_KEY', 'pk_live_51Rz2DUAMGaQlZwTt7BRUGedHWyBcgROGHMVt3y3qA7H60zzahLPbm1mIJ0gL3nI3YT4W21L6jshZ7NrrqcLMgJsx00DvSmN0eq');
+\Stripe\Stripe::setApiKey('');
+define('STRIPE_PUBLISHABLE_KEY', '');
 
 // Prices in TRY (in cents)
 $prices = [
@@ -527,4 +527,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['plan']) && isset($_SE
         }
     </script>
 </body>
+
 </html>
