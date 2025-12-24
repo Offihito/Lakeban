@@ -27,7 +27,7 @@ try {
 
 // Stripe configuration
 require_once __DIR__ . '/stripe-php/init.php';
-\Stripe\Stripe::setApiKey('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');
+\Stripe\Stripe::setApiKey('');
 
 // Verify checkout session
 $session_id = $_GET['session_id'] ?? null;
@@ -117,4 +117,5 @@ try {
     header('Location: /lakebium.php?error=database_error');
     exit;
 }
+
 ?>
