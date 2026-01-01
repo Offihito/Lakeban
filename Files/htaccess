@@ -67,11 +67,3 @@ RewriteRule ^(.*)$ https://lakeban.com/$1 [L,R=301]
     allow from all
 </Files>
 
-# -------------------------------
-# IP Engelleme
-# -------------------------------
-deny from 178.233.1.141
-deny from 88.228.67.192
-deny from 157.230.116.105
-deny from 95.70.129.99
-deny from 85.107.120.99
